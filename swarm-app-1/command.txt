@@ -1,0 +1,4 @@
+docker network create --driver overlay backend
+docker network create --driver overlay frontend
+
+docker service create --name db --network backend -e POSTGRES_PASSWORD=testpass --mount type=volume,source=db-data,target=/var/lib/postgresql/data postgres:9.4
