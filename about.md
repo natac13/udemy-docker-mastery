@@ -15,3 +15,7 @@ birthday party for the Docker release.
 
 For a complete overview on all tools see -> landscape.cncf.io 
 
+## Updating
+
+On a monthly basis, until there are apt packages made, I need to check for updates
+on docker-compose and docker-machine.
