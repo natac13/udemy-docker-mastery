@@ -1,0 +1,69 @@
+version: "3.1"
+
+services:
+  db1:
+    image: mongo:4.0.10-xenial
+    ports:
+      - "27017:27017"
+    volumes:
+      - db1:/data/db
+    secrets:
+      - db-username
+      - db-password
+      - keyfile
+    networks:
+      - mongodb
+    # environment:
+    #   - MONGO_INITDB_ROOT_USERNAME_FILE=/run/secrets/db-username
+    #   - MONGO_INITDB_ROOT_PASSWORD_FILE=/run/secrets/db-password
+    command: mongod --replSet docker-test --smallfiles
+
+  db2:
+    image: mongo:4.0.10-xenial
+    ports:
+      - "27018:27017"
+    volumes:
+      - db2:/data/db
+    secrets:
+      - db-username
+      - db-password
+      - keyfile
+    networks:
+      - mongodb
+    # environment:
+    #   - MONGO_INITDB_ROOT_USERNAME_FILE=/run/secrets/db-username
+    #   - MONGO_INITDB_ROOT_PASSWORD_FILE=/run/secrets/db-password
+    command: mongod --replSet docker-test --smallfiles
+
+  db3:
+    image: mongo:4.0.10-xenial
+    ports:
+      - "27019:27017"
+    volumes:
+      - db3:/data/db
+    secrets:
+      - db-username
+      - db-password
+      - keyfile
+    networks:
+      - mongodb
+    # environment:
+    #   - MONGO_INITDB_ROOT_USERNAME_FILE=/run/secrets/db-username
+    #   - MONGO_INITDB_ROOT_PASSWORD_FILE=/run/secrets/db-password
+    command: mongod --replSet docker-test --smallfiles
+
+volumes:
+  db1:
+  db2:
+  db3:
+
+networks:
+  mongodb:
+
+secrets:
+  db-username:
+    external: true
+  db-password:
+    external: true
+  keyfile:
+    external: true
