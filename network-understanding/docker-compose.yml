@@ -1,0 +1,33 @@
+version: '2.4'
+
+services:
+  app:
+    image: network-understanding
+    build:
+      context: .
+      target: dev
+    volumes:
+      - .:/app
+    environment:
+      - NODE_ENV=development
+      - REDIS_HOST=redis
+      - REDIS_PORT=6379
+      - HOST=0.0.0.0
+      - PORT=3000
+    ports:
+      - 3000:3000
+      - 9229:9229
+    depends_on:
+      - redis
+  redis:
+    image: redis:alpine
+    command: ['redis-server', '--appendonly', 'yes']
+    volumes:
+      - cache:/data
+    healthcheck:
+      test: redis-cli ping
+    # ports:
+    #   - 6379:6379
+
+volumes:
+  cache:
