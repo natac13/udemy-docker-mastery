@@ -48,7 +48,7 @@ CMD ["nodemon", "./index.js"]
 # Testing Stage
 FROM dev as test
 
-User root
+USER root
 
 WORKDIR /app
 
